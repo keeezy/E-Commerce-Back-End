@@ -48,12 +48,39 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', (req, res) => {
+// PUT api/categories/:id
+router.put('/:id', async (req, res) => {
   // update a category by its `id` value
+  try {
+    const categoryId = await Category.findByPk(req.params.id);
+    const updatedCategory = await Category.update(
+      {category_name: req.body.category_name},
+      {where: {id: req.params.id}}
+    );
+    if(!categoryId) {
+      return res.status(500).json({message: `This category ID doesn't exist. Please enter a valid category ID!`})
+    }
+    res.status(200).json(updatedCategory)
+
+  } catch(err) {
+    return res.status(500).json(err)
+  }
 });
 
-router.delete('/:id', (req, res) => {
+// DELETE api/categroies/:id
+router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
+  try {
+    const deleteCategory = await Category.destroy({
+      where: {id:req.params.id},
+    });
+    if(!deleteCategory) {
+      return res.status(500).json({message: `This category ID doesn't exist. Please enter a valid category ID!`})
+    };
+    res.status(200).json(deleteCategory);
+  } catch(err) {
+    return res.status(500).json(err)
+  }
 });
 
 module.exports = router;
