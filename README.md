@@ -3,10 +3,10 @@
 
 
 # E-Commerce-Back-End
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
 
 ## Description
-An application that replicates the backend of an e-commerce website which utilizes node, express and sequelize to interact with a MySQL database.
+An application that replicates the backend of an e-commerce website which utilizes node, express and sequelize to interact with a MySQL database. [Link to video demo!](https://drive.google.com/file/d/16E4hs3A-sINKIaYLa8MUM7PyGZyy3N6u/view?usp=sharing)
 
 ## Table of Contents:
 * [Installation](#installation)
