@@ -51,35 +51,36 @@ router.post('/', async (req, res) => {
 
 // PUT /api/tags/:id
 router.put('/:id', async (req, res) => {
-  // update a tag's name by its `id` value
   try {
-    const checkTagId = await Tag.findByPk(req.params.id);
-    const updateTag = await Tag.update (
-      {tag_name: req.body.tag_name},
-      {where: {id:req.params.id}}
-    );
-    if(!checkTagId) {
-      return res.status(404),json({message: `This tag ID doesn't exist. Please enter a valid ID!`})
+    const checkID = await Tag.findByPk(req.params.id)
+    const updateTag = await Tag.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
+    if (!checkID) {
+      res.status(404).json('No Tag found with this id!')
+      return;
     }
-    res.status(200).json(err);
-  } catch(err) {
-    return res.status(500).json;
+    res.status(200).json('Tag has been updated')
+  } catch (err) {
+    res.status(500).json('Something went wrong', err)
   }
 });
 
 // DELETE /api/tags/:id
 router.delete('/:id', async (req, res) => {
-  // delete on tag by its `id` value
   try {
-    const checkTagId = await Tag.findByPk(req.params.id);
-    const deleteTag = await Tag.destroy(
-      {where: {id: req.params.id}}
-    )
-    if(!deleteTag) {
-      res.status(404).json ({message: 'No tag found with this ID'})
-      return
+    const delTag = await Tag.destroy({
+      where: {
+        id: req.params.id,
+      },
+    })
+    if (!delTag) {
+      res.status(404).json({ message: 'No Tag found with that id!' })
+      return;
     }
-    res.status(200).json({message: 'Tag Deleted'})
+    res.status(200).json({ mesage: 'Tag Deleted' })
   } catch (err) {
     res.status(500).json('Something went wrong', err)
   }
